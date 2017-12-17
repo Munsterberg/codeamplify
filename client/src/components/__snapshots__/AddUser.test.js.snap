@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddUser /> should call onSubmit 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <input
+    name="username"
+    onChange={[Function]}
+    placeholder="Username"
+    required={true}
+    type="text"
+    value="test"
+  />
+  <input
+    name="email"
+    onChange={[Function]}
+    placeholder="Email"
+    required={true}
+    type="email"
+    value="test@test.com"
+  />
+  <button
+    type="submit"
+  >
+    Submit
+  </button>
+</form>
+`;
+
+exports[`<AddUser /> should render correctly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <input
+    name="username"
+    onChange={[Function]}
+    placeholder="Username"
+    required={true}
+    type="text"
+    value=""
+  />
+  <input
+    name="email"
+    onChange={[Function]}
+    placeholder="Email"
+    required={true}
+    type="email"
+    value=""
+  />
+  <button
+    type="submit"
+  >
+    Submit
+  </button>
+</form>
+`;
