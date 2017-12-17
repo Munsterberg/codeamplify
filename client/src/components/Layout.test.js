@@ -11,7 +11,7 @@ describe('<Layout />', () => {
   });
 
   it('should render correctly', () => {
-    expect(wrapper.length).toBe(1);
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should render children when passed', () => {
