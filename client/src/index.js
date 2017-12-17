@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
-class App extends Component {
+import Layout from './components/Layout';
+
+export class App extends Component {
   state = {
     users: []
   }
@@ -19,10 +21,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        hi there
+        <h1>Hi there</h1>
       </div>
     );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Layout><App /></Layout>, document.getElementById('root'));
