@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import Layout from './components/Layout';
 
-export class App extends Component {
+class App extends Component {
   state = {
     users: []
   }
