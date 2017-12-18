@@ -4,7 +4,7 @@ services:
   users-service:
     container_name: users-service
     build:
-      context: ./users-service
+      context: ./services/users
       dockerfile: Dockerfile-prod
     expose:
       - '5000'
@@ -20,7 +20,7 @@ services:
   users-db:
     container_name: users-db
     build:
-      context: ./users-service/project/db
+      context: ./services/users/project/db
       dockerfile: Dockerfile
     ports:
       - 5432:5432
@@ -30,7 +30,7 @@ services:
 
   nginx:
     container_name: nginx
-    build: ./nginx/
+    build: ./services/nginx
     restart: always
     ports:
       - 80:80
