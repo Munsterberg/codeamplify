@@ -22,8 +22,14 @@ seed-db:
 test:
 	docker-compose -f docker-compose-dev.yml run users-service python manage.py test
 
+test-client:
+	docker-compose -f docker-compose-dev.yml run client npm test
+
 cover:
 	docker-compose -f docker-compose-dev.yml run users-service python manage.py cov
+
+cover-client:
+	docker-compose -f docker-compose-dev.yml run client npm run test:coverage
 
 lint:
 	docker-compose -f docker-compose-dev.yml run users-service flake8 project

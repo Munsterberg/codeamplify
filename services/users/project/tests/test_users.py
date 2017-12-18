@@ -13,6 +13,11 @@ def add_user(username, email):
 
 
 class TestUserService(BaseTestCase):
+    def test_index(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Something in here', response.data)
+
     def test_users(self):
         response = self.client.get('/users/ping')
         data = json.loads(response.data.decode())

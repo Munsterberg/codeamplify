@@ -14,6 +14,7 @@ before_install:
 
 before_script:
   - docker-compose -f docker-compose-dev.yml up -d --build
+  - export REACT_APP_USERS_SERVICE=http://127.0.0.1
 
 script:
   - docker-compose -f docker-compose-dev.yml run users-service python manage.py test
@@ -21,3 +22,7 @@ script:
 
 after_script:
   - docker-compose -f docker-compose-dev.yml down
+
+branches:
+  only:
+    - master
