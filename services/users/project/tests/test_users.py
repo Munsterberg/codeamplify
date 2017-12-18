@@ -125,11 +125,5 @@ class TestUserService(BaseTestCase):
             self.assertIn('jakenumber2', data['data']['users'][1]['username'])
 
 
-class TestUserModel(BaseTestCase):
-    def test_str(self):
-        my_user = User(username='testuser', email='test@email.com')
-        self.assertEqual(str(my_user), 'testuser')
-
-
 if __name__ == '__main__':
     unittest.main()
