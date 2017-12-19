@@ -1,8 +1,6 @@
 import json
 import unittest
 from project.tests.base import BaseTestCase
-from project import db
-from project.api.models import User
 from project.tests.utils import add_user
 
 
@@ -25,7 +23,8 @@ class TestUserService(BaseTestCase):
                 '/users',
                 data=json.dumps({
                     'username': 'jake',
-                    'email': 'jake@test.com'
+                    'email': 'jake@test.com',
+                    'password': 'mypassowrdf'
                 }),
                 content_type='application/json'
             )
@@ -58,13 +57,26 @@ class TestUserService(BaseTestCase):
             self.assertIn('Invalid payload.', data['message'])
             self.assertIn('fail', data['status'])
 
+    def test_add_user_invalid_json_keys_no_password(self):
+        with self.client:
+            response = self.client.post(
+                '/users',
+                data=json.dumps({'email': 'my@test.com', 'username': 'reddit'}),
+                content_type='application/json'
+            )
+            data = json.loads(response.data.decode())
+            self.assertEqual(response.status_code, 400)
+            self.assertIn('Invalid payload.', data['message'])
+            self.assertIn('fail', data['status'])
+
     def test_add_user_duplicate_user(self):
         with self.client:
             self.client.post(
                 '/users',
                 data=json.dumps({
                     'username': 'jake12',
-                    'email': 'jake@test.com'
+                    'email': 'jake@test.com',
+                    'password': 'mypass'
                 }),
                 content_type='application/json'
             )
@@ -72,7 +84,8 @@ class TestUserService(BaseTestCase):
                 '/users',
                 data=json.dumps({
                     'username': 'jake12',
-                    'email': 'jake@test.com'
+                    'email': 'jake@test.com',
+                    'password': 'mypass'
                 }),
                 content_type='application/json'
             )
@@ -82,7 +95,7 @@ class TestUserService(BaseTestCase):
             self.assertIn('fail', data['status'])
 
     def test_single_user(self):
-        user = add_user('jake', 'jake@test.com')
+        user = add_user('jake', 'jake@test.com', 'mypassword')
         with self.client:
             response = self.client.get(f'/users/{user.id}')
             data = json.loads(response.data.decode())
@@ -108,8 +121,8 @@ class TestUserService(BaseTestCase):
             self.assertIn('fail', data['status'])
 
     def test_all_users(self):
-        add_user('jake', 'jake@test.com')
-        add_user('jakenumber2', 'jake2@test.com')
+        add_user('jake', 'jake@test.com', 'mypassword')
+        add_user('jakenumber2', 'jake2@test.com', 'mynewpass')
         with self.client:
             response = self.client.get('/users')
             data = json.loads(response.data.decode())
