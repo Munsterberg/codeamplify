@@ -61,7 +61,10 @@ class TestUserService(BaseTestCase):
         with self.client:
             response = self.client.post(
                 '/users',
-                data=json.dumps({'email': 'my@test.com', 'username': 'reddit'}),
+                data=json.dumps({
+                    'email': 'my@test.com',
+                    'username': 'reddit'
+                }),
                 content_type='application/json'
             )
             data = json.loads(response.data.decode())
