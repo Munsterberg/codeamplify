@@ -1,6 +1,7 @@
 import unittest
 import coverage
 from flask_script import Manager
+from flask_migrate import MigrateCommand
 from project import db, create_app
 from project.api.models import User
 
@@ -55,6 +56,9 @@ def test():
     if result.wasSuccessful():
         return 0
     return 1
+
+
+manager.add_command('db', MigrateCommand)
 
 
 if __name__ == '__main__':

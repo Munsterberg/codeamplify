@@ -4,7 +4,8 @@ import { func } from 'prop-types';
 class AddUser extends Component {
   state = {
     username: '',
-    email: ''
+    email: '',
+    password: ''
   }
 
   static propTypes = {
@@ -23,12 +24,13 @@ class AddUser extends Component {
     e.preventDefault();
     this.props.addUser({
       username: this.state.username,
-      email: this.state.email
+      email: this.state.email,
+      password: this.state.password
     });
   }
 
   render() {
-    const { username, email } = this.state;
+    const { username, email, password } = this.state;
     return (
       <form onSubmit={this.onSubmit}>
         <input
@@ -45,6 +47,14 @@ class AddUser extends Component {
           name="email"
           placeholder="Email"
           value={email}
+          required
+        />
+        <input
+          onChange={this.handleChange}
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={password}
           required
         />
         <button type="submit">Submit</button>

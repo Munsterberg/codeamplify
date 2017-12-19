@@ -19,6 +19,12 @@ create-db:
 seed-db:
 	docker-compose -f docker-compose-dev.yml run users-service python manage.py seed_db
 
+migrate:
+	docker-compose -f docker-compose-dev.yml run users-service python manage.py run db migrate
+
+upgrade:
+	docker-compose -f docker-compose-dev.yml run users-service python manage.py run db upgrade
+
 test:
 	docker-compose -f docker-compose-dev.yml run users-service python manage.py test
 
