@@ -2,20 +2,20 @@ from sqlalchemy.exc import IntegrityError
 from project import db
 from project.api.models import User
 from project.tests.base import BaseTestCase
-from project.tests.test_users import add_user
+from project.tests.utils import add_user
 
 
 class TestUserModel(BaseTestCase):
     def test_str(self):
-        my_user = User(username='testuser', email='test@email.com')
-        self.assertEqual(str(my_user), 'testuser')
+        user = add_user('myuser', 'my@test.com')
+        self.assertEqual(str(user), 'myuser')
 
     def test_add_user(self):
-        user = User(username='mytestuser', email='my@test.com')
+        user = add_user('myuser', 'my@test.com')
         db.session.add(user)
         db.session.commit()
         self.assertTrue(user.id)
-        self.assertEqual(user.username, 'mytestuser')
+        self.assertEqual(user.username, 'myuser')
         self.assertEqual(user.email, 'my@test.com')
         self.assertTrue(user.active)
 
