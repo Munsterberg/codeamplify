@@ -60,3 +60,8 @@ class TestUserModel(BaseTestCase):
         user_one = add_user('myuser', 'test@test.com', 'mypass')
         user_two = add_user('myuser2', 'test@test1.com', 'mypass')
         self.assertNotEqual(user_one.password, user_two.password)
+
+    def test_encode_auth_token(self):
+        user = add_user('myuser', 'test@test.com', 'mypassword')
+        auth_token = user.encode_auth_token(user.id)
+        self.assertTrue(isinstance(auth_token, bytes))
