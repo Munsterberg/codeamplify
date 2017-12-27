@@ -114,3 +114,37 @@ class TestAuthBlueprint(BaseTestCase):
             self.assertEqual(response.status_code, 400)
             self.assertIn('Invalid payload.', data['message'])
             self.assertIn('fail', data['status'])
+
+    def test_registered_user_login(self):
+        add_user('mytestuser', 'test@test.com', 'mytestpass')
+        with self.client:
+            response = self.client.post(
+                '/auth/login',
+                data=json.dumps({
+                    'username': 'mytestuser',
+                    'password': 'mytestpass'
+                }),
+                content_type='application/json'
+            )
+            data = json.loads(response.data.decode())
+            self.assertTrue(data['status'] == 'success')
+            self.assertTrue(data['message'] == 'Successfully logged in!')
+            self.assertTrue(data['auth_token'])
+            self.assertTrue(response.content_type == 'application/json')
+            self.assertEqual(response.status_code, 200)
+
+    def test_not_registered_user_login(self):
+        with self.client:
+            response = self.client.post(
+                '/auth/login',
+                data=json.dumps({
+                    'username': 'nouser',
+                    'password': 'mytestpass'
+                }),
+                content_type='application/json'
+            )
+            data = json.loads(response.data.decode())
+            self.assertTrue(data['status'] == 'fail')
+            self.assertTrue(data['message'] == 'User does not exist.')
+            self.assertTrue(response.content_type == 'application/json')
+            self.assertEqual(response.status_code, 404)
