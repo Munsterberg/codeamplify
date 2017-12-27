@@ -12,8 +12,6 @@ class TestUserModel(BaseTestCase):
 
     def test_add_user(self):
         user = add_user('myuser', 'my@test.com', 'mypassword')
-        db.session.add(user)
-        db.session.commit()
         self.assertTrue(user.id)
         self.assertEqual(user.username, 'myuser')
         self.assertEqual(user.email, 'my@test.com')
@@ -21,13 +19,7 @@ class TestUserModel(BaseTestCase):
         self.assertTrue(user.password)
 
     def test_add_user_duplicate(self):
-        user = User(
-            username='duplicate',
-            email='my@test.com',
-            password='mypassword'
-        )
-        db.session.add(user)
-        db.session.commit()
+        add_user('duplicate', 'my@test.com', 'mypassword')
         duplicate_user = User(
             username='duplicate',
             email='my2@test.com',
@@ -37,13 +29,7 @@ class TestUserModel(BaseTestCase):
         self.assertRaises(IntegrityError, db.session.commit)
 
     def test_add_user_duplicate_email(self):
-        user = User(
-            username='duplicate111',
-            email='my@test.com',
-            password='mypass'
-        )
-        db.session.add(user)
-        db.session.commit()
+        add_user('duplicate111', 'my@test.com', 'mypass')
         duplicate_user = User(
             username='duplicate',
             email='my@test.com',
