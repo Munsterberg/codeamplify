@@ -1,7 +1,5 @@
 import json
 from flask import current_app
-from project import db
-from project.api.models import User
 from project.tests.base import BaseTestCase
 from project.tests.utils import add_user
 
@@ -190,7 +188,9 @@ class TestAuthBlueprint(BaseTestCase):
             )
             data = json.loads(response.data.decode())
             self.assertTrue(data['status'] == 'fail')
-            self.assertTrue(data['message'] == 'Signature expired. Please log in again.')
+            self.assertTrue(
+                data['message'] == 'Signature expired. Please log in again.'
+            )
             self.assertEqual(response.status_code, 401)
 
     def test_invalid_logout(self):
@@ -201,5 +201,7 @@ class TestAuthBlueprint(BaseTestCase):
             )
             data = json.loads(response.data.decode())
             self.assertTrue(data['status'] == 'fail')
-            self.assertTrue(data['message'] == 'Invalid token. Please log in again.')
+            self.assertTrue(
+                data['message'] == 'Invalid token. Please log in again.'
+            )
             self.assertEqual(response.status_code, 401)
