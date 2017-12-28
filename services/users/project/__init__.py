@@ -3,7 +3,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from flask_migrate import Migrate
-from flask.ext.bcrypt import Bcrypt
+from flask_bcrypt import Bcrypt
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -23,5 +23,7 @@ def create_app():
 
     from project.api.users import users_blueprint
     app.register_blueprint(users_blueprint)
+    from project.api.auth import auth_blueprint
+    app.register_blueprint(auth_blueprint)
 
     return app
