@@ -1,38 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import App from './App';
 import Layout from './components/Layout';
-import AddUser from './components/AddUser';
+import About from './components/About';
 
-class App extends Component {
-  state = {
-    users: []
-  }
-
-  componentDidMount() {
-    this.getUsers();
-  }
-
-  addUser = async(userObj) => {
-    const response = await axios.post('http://192.168.99.100/users', userObj);
-    this.getUsers();
-    console.log(response);
-  }
-
-  getUsers = async() => {
-    const response = await axios.get('http://192.168.99.100/users');
-    this.setState(() => { return  { users: response.data.data.users }; });
-  }
-
-  render() {
-    return (
-      <div>
-        <h1>Hi there</h1>
-        <AddUser addUser={this.addUser} />
-      </div>
-    );
-  }
+function AppRouter() {
+  return (
+    <Router>
+      <Layout>
+        <Switch>
+          <Route path='/' component={App} exact />
+          <Route path='/about' component={About} />
+        </Switch>
+      </Layout>
+    </Router>
+  );
 }
 
-ReactDOM.render(<Layout><App /></Layout>, document.getElementById('root'));
+ReactDOM.render(<AppRouter />, document.getElementById('root'));

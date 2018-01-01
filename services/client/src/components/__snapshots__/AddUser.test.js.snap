@@ -20,6 +20,14 @@ exports[`<AddUser /> should call onSubmit 1`] = `
     type="email"
     value="test@test.com"
   />
+  <input
+    name="password"
+    onChange={[Function]}
+    placeholder="Password"
+    required={true}
+    type="password"
+    value=""
+  />
   <button
     type="submit"
   >
@@ -46,6 +54,14 @@ exports[`<AddUser /> should render correctly 1`] = `
     placeholder="Email"
     required={true}
     type="email"
+    value=""
+  />
+  <input
+    name="password"
+    onChange={[Function]}
+    placeholder="Password"
+    required={true}
+    type="password"
     value=""
   />
   <button
