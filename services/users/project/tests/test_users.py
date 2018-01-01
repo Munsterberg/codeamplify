@@ -134,6 +134,43 @@ class TestUserService(BaseTestCase):
             self.assertIn('jake', data['data']['users'][0]['username'])
             self.assertIn('jakenumber2', data['data']['users'][1]['username'])
 
+    def test_user_status(self):
+        add_user('jake', 'test@jake.com', 'mypass')
+        with self.client:
+            resp_login = self.client.post(
+                '/auth/login',
+                data=json.dumps({
+                    'username': 'jake',
+                    'password': 'mypass'
+                }),
+                content_type='application/json'
+            )
+            token = json.loads(resp_login.data.decode())['auth_token']
+            response = self.client.get(
+                '/auth/status',
+                headers={'Authorization': f'Bearer {token}'}
+            )
+            data = json.loads(response.data.decode())
+            self.assertTrue(data['status'] == 'success')
+            self.assertTrue(data['data'] is not None)
+            self.assertTrue(data['data']['username'] == 'jake')
+            self.assertTrue(data['data']['email'] == 'test@jake.com')
+            self.assertTrue(data['data']['active'] is True)
+            self.assertEqual(response.status_code, 200)
+
+    def test_invalid_status(self):
+        with self.client:
+            response = self.client.get(
+                '/auth/status',
+                headers={'Authorization': 'Bearer invalid'}
+            )
+            data = json.loads(response.data.decode())
+            self.assertTrue(data['status'] == 'fail')
+            self.assertTrue(
+                data['message'] == 'Invalid token. Please log in again.'
+            )
+            self.assertEqual(response.status_code, 401)
+
 
 if __name__ == '__main__':
     unittest.main()
