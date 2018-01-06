@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AuthDashboard /> should render correctly 1`] = `
+<AuthForm
+  formData={
+    Object {
+      "email": "",
+      "password": "",
+      "username": "",
+    }
+  }
+  formType="Register"
+/>
+`;
