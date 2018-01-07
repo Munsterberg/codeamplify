@@ -10,5 +10,7 @@ exports[`<AuthDashboard /> should render correctly 1`] = `
     }
   }
   formType="Register"
+  handleChange={[Function]}
+  handleFormSubmit={[Function]}
 />
 `;

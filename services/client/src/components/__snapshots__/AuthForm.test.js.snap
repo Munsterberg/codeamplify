@@ -6,7 +6,9 @@ exports[`<AuthForm /> should render correctly 1`] = `
     Register
   </h1>
   <hr />
-  <form>
+  <form
+    onSubmit={[Function]}
+  >
     <div
       className="form-group"
     >

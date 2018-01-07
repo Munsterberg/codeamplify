@@ -1,17 +1,24 @@
 import React from 'react';
-import { string, object } from 'prop-types';
+import { string, object, func } from 'prop-types';
 
 const propTypes = {
   formType: string,
-  formData: object
+  formData: object,
+  handleChange: func,
+  handleFormSubmit: func
 };
 
-const AuthForm = ({ formType, formData }) => {
+const AuthForm = ({
+  formType,
+  formData,
+  handleChange,
+  handleFormSubmit
+}) => {
   return (
     <div>
       <h1>{ formType }</h1>
       <hr/>
-      <form>
+      <form onSubmit={(e) => handleFormSubmit(e)}>
         {
           formType === 'Register' &&
             <div className="form-group">
@@ -22,7 +29,7 @@ const AuthForm = ({ formType, formData }) => {
                 placeholder="Email Address"
                 required
                 value={formData.email}
-                onChange={() => {}}
+                onChange={(event) => handleChange(event)}
               />
             </div>
         }
@@ -34,7 +41,7 @@ const AuthForm = ({ formType, formData }) => {
             placeholder="Username"
             required
             value={formData.username}
-            onChange={() => {}}
+            onChange={(event) => handleChange(event)}
           />
         </div>
         <div className="form-group">
@@ -45,7 +52,7 @@ const AuthForm = ({ formType, formData }) => {
             placeholder="Password"
             required
             value={formData.password}
-            onChange={() => {}}
+            onChange={(event) => handleChange(event)}
           />
         </div>
         <input
