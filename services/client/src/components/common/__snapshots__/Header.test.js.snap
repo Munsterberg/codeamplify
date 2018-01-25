@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> should render correctly 1`] = `
+<Uncontrolled(Navbar)
+  bsStyle="default"
+  collapseOnSelect={true}
+  inverse={true}
+>
+  <NavbarHeader>
+    <NavbarBrand>
+      <span>
+        Brand
+      </span>
+    </NavbarBrand>
+    <NavbarToggle />
+  </NavbarHeader>
+  <NavbarCollapse>
+    <Nav
+      bsClass="nav"
+      justified={false}
+      pullLeft={false}
+      pullRight={false}
+      stacked={false}
+    >
+      <LinkContainer
+        activeClassName="active"
+        exact={false}
+        replace={false}
+        strict={false}
+        to="/"
+      >
+        <NavItem
+          active={false}
+          disabled={false}
+          eventKey={1}
+        >
+          Home
+        </NavItem>
+      </LinkContainer>
+      <LinkContainer
+        activeClassName="active"
+        exact={false}
+        replace={false}
+        strict={false}
+        to="/about"
+      >
+        <NavItem
+          active={false}
+          disabled={false}
+          eventKey={2}
+        >
+          About
+        </NavItem>
+      </LinkContainer>
+    </Nav>
+    <Nav
+      bsClass="nav"
+      justified={false}
+      pullLeft={false}
+      pullRight={true}
+      stacked={false}
+    >
+      <LinkContainer
+        activeClassName="active"
+        exact={false}
+        replace={false}
+        strict={false}
+        to="/register"
+      >
+        <NavItem
+          active={false}
+          disabled={false}
+          eventKey={1}
+        >
+          Register
+        </NavItem>
+      </LinkContainer>
+      <LinkContainer
+        activeClassName="active"
+        exact={false}
+        replace={false}
+        strict={false}
+        to="/login"
+      >
+        <NavItem
+          active={false}
+          disabled={false}
+          eventKey={2}
+        >
+          Login
+        </NavItem>
+      </LinkContainer>
+    </Nav>
+  </NavbarCollapse>
+</Uncontrolled(Navbar)>
+`;

@@ -1,38 +1,35 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
+import configureStore from './store/configureStore';
+
+import App from './App';
 import Layout from './components/Layout';
-import AddUser from './components/AddUser';
+import AboutContainer from './containers/AboutContainer';
+import AuthDashboard from './components/AuthDashboard';
 
-class App extends Component {
-  state = {
-    users: []
-  }
+const store = configureStore();
 
-  componentDidMount() {
-    this.getUsers();
-  }
-
-  addUser = async(userObj) => {
-    const response = await axios.post('http://192.168.99.100/users', userObj);
-    this.getUsers();
-    console.log(response);
-  }
-
-  getUsers = async() => {
-    const response = await axios.get('http://192.168.99.100/users');
-    this.setState(() => { return  { users: response.data.data.users }; });
-  }
-
-  render() {
-    return (
-      <div>
-        <h1>Hi there</h1>
-        <AddUser addUser={this.addUser} />
-      </div>
-    );
-  }
+function AppRouter() {
+  return (
+    <Router>
+      <Layout>
+        <Switch>
+          <Route path='/' component={App} exact />
+          <Route path='/about' component={AboutContainer} />
+          <Route path='/register' component={AuthDashboard} />
+          <Route path='/login' component={AuthDashboard} />
+        </Switch>
+      </Layout>
+    </Router>
+  );
 }
 
-ReactDOM.render(<Layout><App /></Layout>, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>,
+  document.getElementById('root')
+);
