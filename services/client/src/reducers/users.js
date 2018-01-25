@@ -1,5 +1,4 @@
 import {
-  FETCH_USERS,
   FETCHING_USERS,
   FETCHING_USERS_FAILURE,
   FETCHING_USERS_SUCCESS
@@ -14,10 +13,6 @@ const initialState = {
 
 function usersReducer(state = initialState, action) {
   switch(action.type) {
-    case FETCH_USERS:
-      return {
-        ...state,
-      };
     case FETCHING_USERS:
       return {
         ...state,

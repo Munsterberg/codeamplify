@@ -11,7 +11,6 @@ class App extends Component {
   static propTypes = {
     isFetching: bool.isRequired,
     error: string.isRequired,
-    fetchUsers: func.isRequired,
     fetchingUsers: func.isRequired,
     fetchingUsersFailure: func.isRequired,
     fetchingUsersSuccess: func.isRequired

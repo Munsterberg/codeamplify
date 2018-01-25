@@ -2,13 +2,6 @@ import * as actionTypes from './actionTypes';
 import * as userActions from './users';
 
 describe('action types', () => {
-  it('should create an action to fetch users', () => {
-    const expectedAction = {
-      type: actionTypes.FETCH_USERS
-    };
-    expect(userActions.fetchUsers()).toEqual(expectedAction);
-  });
-
   it('should create an action to change isFetching to true', () => {
     const expectedAction = {
       type: actionTypes.FETCHING_USERS

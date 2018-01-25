@@ -1,19 +1,14 @@
 import {
-  FETCH_USERS,
   FETCHING_USERS,
   FETCHING_USERS_FAILURE,
   FETCHING_USERS_SUCCESS
 } from './actionTypes';
 
-export const fetchUsers = () => ({
-  type: FETCH_USERS
-});
-
 export const fetchingUsers = () => ({
   type: FETCHING_USERS
 });
 
-export const fetchingUsersFailure = (error) => ({
+export const fetchingUsersFailure = () => ({
   type: FETCHING_USERS_FAILURE,
   error: 'Error fetching users.'
 });
