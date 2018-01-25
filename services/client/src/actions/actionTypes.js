@@ -1,0 +1,2 @@
+export const FETCH_USERS = 'FETCH_USERS';
+export const FETCHING_USERS = 'FETCHING_USERS';
