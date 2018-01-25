@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { bool, string, func } from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
+import * as userActionCreators from './actions/users';
 import AddUser from './components/AddUser';
 
 class App extends Component {
-  state = {
-    users: []
+  static propTypes = {
+    isFetching: bool.isRequired,
+    error: string.isRequired,
+    fetchUsers: func.isRequired,
+    fetchingUsers: func.isRequired,
+    fetchingUsersFailure: func.isRequired,
+    fetchingUsersSuccess: func.isRequired
   }
 
   componentDidMount() {
@@ -19,8 +28,14 @@ class App extends Component {
   }
 
   getUsers = async() => {
-    const response = await axios.get('http://192.168.99.100/users');
-    this.setState(() => { return  { users: response.data.data.users }; });
+    this.props.fetchingUsers();
+    let response;
+    try {
+      response = await axios.get('http://192.168.99.100/users');
+      this.props.fetchingUsersSuccess(response.data.data.users);
+    } catch(e) {
+      this.props.fetchingUsersFailure(e);
+    }
   }
 
   render() {
@@ -33,4 +48,15 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    isFetching: state.users.isFetching,
+    error: state.users.error
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(userActionCreators, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
