@@ -29,9 +29,8 @@ class App extends Component {
 
   getUsers = async() => {
     this.props.fetchingUsers();
-    let response;
     try {
-      response = await axios.get('http://192.168.99.100/users');
+      const response = await axios.get('http://192.168.99.100/users');
       this.props.fetchingUsersSuccess(response.data.data.users);
     } catch(e) {
       this.props.fetchingUsersFailure(e);
